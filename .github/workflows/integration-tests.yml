@@ -31,13 +31,10 @@ jobs:
       run: |
         uv venv
 
-    - name: Install python-ldap dependency
-      run: |
-        uv pip install python-ldap
-
     - name: Install dependencies
       run: |
         uv sync --extra pgsql --group dev
+        uv pip install python-ldap
 
     - name: Run Integration Tests
       run: |
