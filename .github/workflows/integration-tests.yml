@@ -16,11 +16,15 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.12' # Matching the project's pyproject.toml requirement
+        python-version: '3.12'
 
     - name: Install uv
       run: |
         pip install uv
+
+    - name: Create virtual environment
+      run: |
+        uv venv
 
     - name: Install python-ldap dependency
       run: |
@@ -28,7 +32,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        uv sync --extra pgsql --group dev # As seen in Taskfile.yml setup:py
+        uv sync --extra pgsql --group dev
 
     - name: Run Integration Tests
       run: |
