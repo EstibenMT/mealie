@@ -1,3 +1,6 @@
 {
-  "recommendations": ["lokalise.i18n-ally"]
+  "recommendations": [
+    "lokalise.i18n-ally",
+    "google.geminicodeassist"
+  ]
 }

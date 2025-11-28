@@ -25,7 +25,6 @@ dependencies = [
     "pyhumps>=3.5.3,<4.0.0",
     "python-dateutil>=2.8.2,<3.0.0",
     "python-dotenv>=1.0.0,<2.0.0",
-    "python-ldap>=3.3.1,<4.0.0",
     "python-multipart>=0.0.20,<1.0.0",
     "python-slugify>=8.0.0,<9.0.0",
     "recipe-scrapers>=15.0.0,<16.0.0",
