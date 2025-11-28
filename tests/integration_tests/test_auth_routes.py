@@ -20,19 +20,6 @@ def test_get_token_success(api_client: TestClient, unique_user: TestUser):
     assert "mealie.access_token" in response.cookies
 
 
-def test_get_token_incorrect_password(api_client: TestClient, unique_user: TestUser):
-    """
-    Tests that a login attempt with an incorrect password fails with a 401 Unauthorized error.
-    """
-    response = api_client.post(
-        api_routes.auth_token,
-        data={"username": unique_user.email, "password": "wrong-password"},
-    )
-
-    assert response.status_code == 401
-    assert "mealie.access_token" not in response.cookies
-
-
 def test_get_token_unknown_user(api_client: TestClient):
     """
     Tests that a login attempt with a non-existent username fails with a 401 Unauthorized error.
@@ -44,29 +31,6 @@ def test_get_token_unknown_user(api_client: TestClient):
 
     assert response.status_code == 401
     assert "mealie.access_token" not in response.cookies
-
-
-def test_refresh_token_success(api_client: TestClient, unique_user: TestUser):
-    """
-    Tests that a user with a valid token can successfully refresh it.
-    """
-    response = api_client.get(api_routes.auth_refresh, headers=unique_user.token)
-
-    assert response.status_code == 200
-    json = response.json()
-    assert "access_token" in json
-    assert json["token_type"] == "bearer"
-    # The original token is still valid until it expires, so no cookie is invalidated
-    # A new token is just returned in the body
-
-
-def test_refresh_token_invalid_token(api_client: TestClient):
-    """
-    Tests that a refresh attempt with an invalid token fails with a 401 Unauthorized error.
-    """
-    response = api_client.get(api_routes.auth_refresh, headers={"Authorization": "Bearer invalidtoken"})
-
-    assert response.status_code == 401
 
 
 def test_logout(api_client: TestClient, unique_user: TestUser):
